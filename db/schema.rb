@@ -25,11 +25,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_22_094504) do
   create_table "students", force: :cascade do |t|
     t.bigint "school_id", null: false
     t.string "name"
-    t.integer "order"
+    t.integer "ordering"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_students_on_deleted_at"
+    t.index ["ordering"], name: "index_students_on_ordering"
     t.index ["school_id"], name: "index_students_on_school_id"
   end
 

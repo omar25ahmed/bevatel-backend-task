@@ -14,12 +14,12 @@ RSpec.describe Student, type: :model do
 
   describe 'callbacks' do
     it 'should set order' do
-      expect(@student.order).to eq(1)
+      expect(@student.ordering).to eq(1)
     end
 
     it 'should set order after destroy' do
       @student.destroy
-      expect(@student.order).to eq(nil)
+      expect(@student.ordering).to eq(nil)
     end
   end
 end
