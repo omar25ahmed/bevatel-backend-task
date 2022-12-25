@@ -3,7 +3,7 @@
     app:
       image: bevatel-backend-task
       environment:
-        POSTGRES_USER: omar25
+        POSTGRES_USER: postgres
         POSTGRES_PASSWD: postgres
         POSTGRES_HOST: db
       ports:
