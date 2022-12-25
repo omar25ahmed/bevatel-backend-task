@@ -1,0 +1,14 @@
+  version: "3"
+  services:
+    app:
+      image: bevatel-backend-task
+      environment:
+        POSTGRES_USER: omar25
+        POSTGRES_PASSWD: postgres
+        POSTGRES_HOST: db
+      ports:
+        - 3000:3000
+    db:
+      image: postgres:alpine3.15
+      environment:
+        POSTGRES_PASSWORD: postgres
