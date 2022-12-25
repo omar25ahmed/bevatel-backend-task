@@ -14,8 +14,15 @@
     <h1>BevatelBackendTask</h1>
     <nav>
       <ul>
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= button_to "logout", destroy_user_session_path, method: :delete %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Students", students_path %></li>
+          <li><%= link_to "Schools", schools_path %></li>
+          <li><%= button_to "logout", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Login", new_user_session_path %></li>
+          <li><%= link_to "Sign up", new_user_registration_path %></li>
+        <% end %>
       </ul>
     <%
 =begin%>
