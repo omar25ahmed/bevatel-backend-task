@@ -45,6 +45,19 @@ bin/dev # necessary to start the app for the first time
 rails s # can be used after starting the app at least once
 ```
 
+### Usage via Docker
+
+Run the following command to start the server by Docker, then go to http://localhost:3000
+
+```sh
+docker-compose down # to drop any existing container
+docker-compose up --build # to start a new container
+docker-compose run web rails db:create # create database
+docker-compose run web rails db:migrate # migrate tables
+docker-compose run web rails db:seed # load all data in database from seed.rb
+```
+
+
 ### Run tests
 
 ```sh

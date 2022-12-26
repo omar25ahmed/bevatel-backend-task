@@ -1,17 +1,16 @@
-FROM ruby:3.1.2-alpine AS builder
-  RUN apk add \
-    build-base \
-    postgresql-dev
-  COPY Gemfile* ./
-  RUN bundle install
-   FROM ruby:3.1.2-alpine AS runner
-  RUN apk add \
-      tzdata \
-      nodejs \
-      postgresql-dev
-  WORKDIR /app
-  # We copy over the entire gems directory for our builder image, containing the already built artifact
-  COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
-  COPY . .
-  EXPOSE 3000
-  CMD ["rails", "server", "-b", "0.0.0.0"]
+# syntax=docker/dockerfile:1
+FROM ruby:3.1.2
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+WORKDIR /myapp
+COPY Gemfile /myapp/Gemfile
+COPY Gemfile.lock /myapp/Gemfile.lock
+RUN bundle install
+
+# Add a script to be executed every time the container starts.
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
+
+# Configure the main process to run when running the image
+CMD ["rails", "server", "-b", "0.0.0.0"]
